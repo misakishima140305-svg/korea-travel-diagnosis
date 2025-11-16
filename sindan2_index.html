@@ -292,7 +292,25 @@
         else if (avg <= 3.8) type = "生活・環境重視タイプ";
         else type = "安心タイプ";
 
-        window.location.href = `result.html?type=${encodeURIComponent(type)}`;
+        // ★ 送信するデータ
+const payload = {
+  type: type,
+  answers: answers
+};
+
+// ★ データをGASに送信
+fetch("https://script.google.com/macros/s/AKfycbzKLR1uB_kqsTvJ3-qL-1f2SP5P9d_x4h4atEr5copaxjgOjOQbHfs-Snbiw6nfz0HO/exec", {
+  method: "POST",
+  mode: "no-cors",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(payload)
+}).then(() => {
+  // ★ 結果ページに移動
+  window.location.href = `result.html?type=${encodeURIComponent(type)}`;
+});
+
       }
     });
 
