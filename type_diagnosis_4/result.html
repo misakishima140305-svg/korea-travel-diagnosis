@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>韓国旅行タイプ診断結果</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Zen Maru Gothic', sans-serif;
+      background: linear-gradient(180deg, #E8FFFA 0%, #FFFFFF 100%);
+      color: #333;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      padding-bottom: 80px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      background-color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      color: #00AC9A;
+      font-weight: 700;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 1.5rem;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    nav a {
+      color: #00AC9A;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.7;
+    }
+
+    .section {
+      max-width: 750px;
+      margin: 3rem auto 6rem;
+      background: white;
+      border-radius: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .result-type {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #00AC9A;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .result-text {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .result-illustration {
+      width: 70%;
+      max-width: 380px;
+      margin: 0 auto 2rem;
+    }
+
+    .action-btn {
+      display: inline-block;
+      background-color: #00AC9A;
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      box-shadow: 0 6px 0 #009685;
+      transition: all 0.2s ease;
+      margin: 0.5rem;
+      text-decoration: none;
+    }
+
+    .action-btn:hover {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 #009685;
+      opacity: 0.9;
+    }
+
+    .recommendation {
+      margin-top: 3rem;
+      text-align: left;
+    }
+
+    .recommendation h3 {
+      font-size: 1.6rem;
+      color: #00AC9A;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .recommendation-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .recommendation-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .recommendation-card {
+      background: white;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    .recommendation-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .recommendation-card-content {
+      padding: 1rem 1.2rem;
+    }
+
+    .recommendation-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #00AC9A;
+    }
+
+    .sns-section {
+      background: #E8FFFA;
+      text-align: center;
+      padding: 4rem 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background: white;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0.8rem 0;
+      font-size: 1rem;
+      color: #00AC9A;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    footer a {
+      color: #00AC9A;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    footer a:hover {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>韓国旅行タイプ診断</h1>
+    <nav>
+      <ul>
+        <li><a href="sindan.html">タイプ診断</a></li>
+        <li><a href="type-list.html">タイプ一覧</a></li>
+        <li><a href="jyouhou.html">おすすめ情報</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section">
+      <h2 class="text-2xl font-bold text-[#00AC9A]">診断結果</h2>
+
+      <!-- イラスト -->
+      <img id="typeImg" class="result-illustration" src="" alt="診断タイプのイラスト">
+
+      <!-- 結果タイプ名 -->
+      <div id="typeName" class="result-type"></div>
+
+      <!-- 説明文 -->
+      <div id="typeDesc" class="result-text"></div>
+
+      <a href="sindan.html" class="action-btn">もう一度診断する</a>
+      <a href="type-list.html" class="action-btn">タイプ一覧を見る</a>
+
+      <!-- おすすめ情報 -->
+      <div class="recommendation">
+        <h3>あなたにおすすめの情報</h3>
+        <div class="recommendation-grid">
+          <div class="recommendation-card">
+            <img src="images/safety-tip.png">
+            <div class="recommendation-card-content">
+              <h4>安全対策ガイド</h4>
+              <p>旅行前に知っておきたい、防犯ポイントや緊急連絡先のまとめ。</p>
+            </div>
+          </div>
+
+          <div class="recommendation-card">
+            <img src="images/hygiene-tip.png">
+            <div class="recommendation-card-content">
+              <h4>衛生・健康対策</h4>
+              <p>現地で安心して過ごすための衛生情報・持ち物リスト。</p>
+            </div>
+          </div>
+
+          <div class="recommendation-card">
+            <img src="images/travel-insurance.png">
+            <div class="recommendation-card-content">
+              <h4>旅行保険のポイント</h4>
+              <p>万が一に備えて加入しておくと安心の保険情報を紹介。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a href="sindan.html">診断</a>
+    <a href="type-list.html">タイプ一覧</a>
+    <a href="jyouhou.html">おすすめ</a>
+    <a href="#">SNS</a>
+  </footer>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+
+    const typeData = {
+      "コミュニケーション大事タイプ": {
+        img: "images/type.png",
+        desc: "現地での会話や文化の違いに不安があるタイプ。事前に簡単な韓国語やコミュニケーションのポイントを知ると安心！"
+      },
+      "準備・計画大事タイプ": {
+        img: "images/type.png",
+        desc: "計画性を重視するタイプ。旅程のテンプレや、モデルコースを見るとグッと安心できます。"
+      },
+      "文化・治安重視タイプ": {
+        img: "images/type.png",
+        desc: "文化の違いや治安面が気になるタイプ。現地のルールや安全情報をチェックすると安心！"
+      },
+      "生活・環境重視タイプ": {
+        img: "images/type.png",
+        desc: "衛生面・食事・交通など環境面の不安があるタイプ。事前の情報収集でぐっと快適になります。"
+      },
+      "安心タイプ": {
+        img: "images/type.png",
+        desc: "不安が少なく、安心して旅行できるタイプ。もっと新しいスポットに挑戦してみても◎"
+      }
+    };
+
+    const data = typeData[type] || typeData["安心タイプ"];
+
+    document.getElementById("typeImg").src = data.img;
+    document.getElementById("typeName").textContent = `あなたは「${type}」です`;
+    document.getElementById("typeDesc").textContent = data.desc;
+  </script>
+
+</body>
+</html>
